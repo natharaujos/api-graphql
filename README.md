@@ -42,7 +42,7 @@ Before running this project, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/customer-appointment-api.git
+git clone https://github.com/natharaujos/customer-appointment-api.git
 cd customer-appointment-api
 
 ```
