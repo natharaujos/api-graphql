@@ -44,33 +44,49 @@ Before running this project, ensure you have the following installed:
 ```bash
 git clone https://github.com/your-username/customer-appointment-api.git
 cd customer-appointment-api
-2. Install Dependencies
+
+```
+
+### 2. Install Dependencies
+
+```bash
 Install the required dependencies using npm or yarn:
 
 npm install
 # or
 yarn install
-3. Set Up the Database
+```
+
+### 3. Set Up the Database
+
 This project uses SQLite as the database. Prisma will handle migrations and schema generation.
 
+```bash
 Initialize the .env file:
 cp .env.example .env
 Run the Prisma migration to set up the database schema:
 npx prisma migrate dev --name init
 Optionally, open Prisma Studio to inspect your database:
 npx prisma studio
-4. Start the Server
+```
+
+### 4. Start the Server
 Run the Apollo Server:
 
+```bash
 npm run dev
 # or
 yarn dev
+```
+
 The server will start at http://localhost:4000.
 
 GraphQL Schema
 The GraphQL schema defines the types and operations available in the API. Below is an overview of the key types and queries/mutations:
 
 Types
+
+```bash
 type Customer {
 id: ID!
 name: String!
@@ -84,55 +100,58 @@ endsAt: String!
 customer: Customer!
 }
 Queries
-Get All Customers:
+Get All Customers
 query {
-  customers {
-    id
-    name
-    appointments {
-      id
-      startsAt
-      endsAt
-    }
-  }
-}
-Get Appointment by ID (and its Customer):
-query {
-  appointment(id: 1) {
+customers {
+  id
+  name
+  appointments {
     id
     startsAt
     endsAt
-    customer {
-      id
-      name
-    }
   }
+}
+}
+Get Appointment by ID (and its Customer)
+query {
+appointment(id: 1) {
+  id
+  startsAt
+  endsAt
+  customer {
+    id
+    name
+  }
+}
 }
 Mutations
-Create a Customer:
+Create a Customer
 mutation {
-  createCustomer(name: "John Doe") {
+createCustomer(name: "John Doe") {
+  id
+  name
+}
+}
+Create an Appointment
+mutation {
+createAppointment(
+  startsAt: "2023-10-01T10:00:00Z"
+  endsAt: "2023-10-01T11:00:00Z"
+  customerId: 1
+) {
+  id
+  startsAt
+  endsAt
+  customer {
     id
     name
   }
 }
-Create an Appointment:
-mutation {
-  createAppointment(
-    startsAt: "2023-10-01T10:00:00Z"
-    endsAt: "2023-10-01T11:00:00Z"
-    customerId: 1
-  ) {
-    id
-    startsAt
-    endsAt
-    customer {
-      id
-      name
-    }
-  }
 }
+```
+
 Project Structure
+```bash
 ├── prisma/
 │   ├── schema.prisma     # Prisma schema defining the database models
 │   └── migrations/       # Database migration files
@@ -144,8 +163,10 @@ Project Structure
 ├── .env                  # Environment variables (e.g., DATABASE_URL)
 ├── package.json          # Project metadata and dependencies
 └── README.md             # Documentation
-How It Works
-1. Prisma Models
+```
+
+# How It Works
+### 1. Prisma Models
 The database schema is defined in prisma/schema.prisma. Here's the structure:
 
 model Customer {
@@ -161,7 +182,8 @@ endsAt      DateTime
 customer    Customer   @relation(fields: [customerId], references: [id])
 customerId  Int
 }
-2. Resolvers
+
+### 2. Resolvers
 Resolvers are implemented to handle GraphQL queries and mutations. For example:
 
 Query: Fetch all customers and their appointments.
@@ -171,6 +193,8 @@ Resolvers are located in src/resolvers/.
 Example Usage
 Create a Customer
 Run the following mutation in the GraphQL Playground (http://localhost:4000):
+
+```bash
 
 mutation {
 createCustomer(name: "Jane Doe") {
@@ -210,6 +234,8 @@ appointment(id: 1) {
   }
 }
 }
+```
+
 Future Improvements
 Add authentication and authorization.
 Implement pagination for large datasets.
@@ -220,4 +246,6 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 Acknowledgments
 This project was built to practice working with Apollo Server, GraphQL, and Prisma. Special thanks to the creators and maintainers of these amazing tools!
+
+
 
