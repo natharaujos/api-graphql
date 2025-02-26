@@ -169,6 +169,7 @@ Project Structure
 ### 1. Prisma Models
 The database schema is defined in prisma/schema.prisma. Here's the structure:
 
+```bash
 model Customer {
 id          Int           @id @default(autoincrement())
 name        String
@@ -182,7 +183,7 @@ endsAt      DateTime
 customer    Customer   @relation(fields: [customerId], references: [id])
 customerId  Int
 }
-
+```
 ### 2. Resolvers
 Resolvers are implemented to handle GraphQL queries and mutations. For example:
 
