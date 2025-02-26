@@ -66,7 +66,6 @@ npm run dev
 # or
 yarn dev
 The server will start at http://localhost:4000.
-```
 
 GraphQL Schema
 The GraphQL schema defines the types and operations available in the API. Below is an overview of the key types and queries/mutations:
