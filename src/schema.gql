@@ -10,9 +10,13 @@ type Appointment {
 }
 
 input CreateAppointmentInput {
-  customerId: String!
+  customerId: Float!
   endsAt: DateTimeISO!
   startsAt: DateTimeISO!
+}
+
+input CreateCustomerInput {
+  name: String!
 }
 
 type Customer {
@@ -26,6 +30,7 @@ scalar DateTimeISO
 
 type Mutation {
   createAppointment(data: CreateAppointmentInput!): Appointment!
+  createCustomer(data: CreateCustomerInput!): Customer!
 }
 
 type Query {
